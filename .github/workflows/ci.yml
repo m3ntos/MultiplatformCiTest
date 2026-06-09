@@ -59,7 +59,10 @@ jobs:
 
   ios-build:
     name: iOS build
-    runs-on: macos-latest
+    # Compose Multiplatform 1.11 references iOS 26 SDK symbols (UIViewLayoutRegion,
+    # UIUtilities, SwiftUICore), so linking needs Xcode 26. macos-latest still ships
+    # Xcode 16.x (iOS 18 SDK) and fails to link; macos-26 defaults to Xcode 26.x.
+    runs-on: macos-26
     needs: common-tests
     steps:
       - name: Checkout
