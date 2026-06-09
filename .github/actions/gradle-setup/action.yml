@@ -6,7 +6,7 @@ runs:
   using: composite
   steps:
     - name: Set up JDK
-      uses: actions/setup-java@v4
+      uses: actions/setup-java@v5
       with:
         # Must match gradle/gradle-daemon-jvm.properties.
         # Matching it means Gradle reuses this JDK for the build JVM
