@@ -29,6 +29,10 @@ jobs:
     name: Common Tests (JVM)
     runs-on: ubuntu-latest
     needs: lint
+    # dorny/test-reporter needs checks:write to publish the results check run.
+    permissions:
+      contents: read
+      checks: write
     steps:
       - name: Checkout
         uses: actions/checkout@v6
@@ -38,6 +42,16 @@ jobs:
 
       - name: Run shared unit tests (commonTest + androidHostTest)
         run: ./gradlew :shared:testAndroidHostTest
+
+      # Parses the JUnit XML into a Checks-tab report + inline PR annotations.
+      # if: always() so failing tests are still reported (the main reason for it).
+      - name: Publish test results
+        uses: dorny/test-reporter@v3
+        if: always()
+        with:
+          name: Unit test results
+          path: "**/build/test-results/**/*.xml"
+          reporter: java-junit
 
       - name: Upload test reports
         if: always()
