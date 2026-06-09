@@ -1,0 +1,7 @@
+TEAM_ID=
+
+PRODUCT_NAME=Multiplatformcitest
+PRODUCT_BUNDLE_IDENTIFIER=com.example.multiplatform_ci_test.Multiplatformcitest$(TEAM_ID)
+
+CURRENT_PROJECT_VERSION=1
+MARKETING_VERSION=1.0
